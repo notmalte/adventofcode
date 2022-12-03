@@ -6,4 +6,5 @@ edition = "2021"
 [workspace]
 members = ["day*"]
 
-[dependencies]
+[workspace.dependencies]
+itertools = "0.10.5"
