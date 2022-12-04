@@ -9,19 +9,17 @@ fn main() {
 
     let input = fs::read_to_string(input_file).unwrap();
 
+    println!("Input: {}", input);
+
     println!("Part 1: {}", part1(&input));
 
     println!("Part 2: {}", part2(&input));
 }
 
 fn part1(input: &str) -> isize {
-    println!("Input: {}", input);
-
     todo!();
 }
 
 fn part2(input: &str) -> isize {
-    println!("Input: {}", input);
-
     todo!();
 }
