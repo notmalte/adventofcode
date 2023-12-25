@@ -1,3 +1,4 @@
+use itertools::Itertools;
 use std::{env, fs};
 
 fn main() {
@@ -24,6 +25,26 @@ enum Tile {
     SouthEast,
     SouthWest,
     Start,
+}
+
+#[derive(Debug, Copy, Clone, Eq, PartialEq)]
+enum Direction {
+    North,
+    East,
+    South,
+    West,
+}
+
+impl Direction {
+    fn from_xy(dx: isize, dy: isize) -> Direction {
+        match (dx, dy) {
+            (0, -1) => Direction::North,
+            (0, 1) => Direction::South,
+            (1, 0) => Direction::East,
+            (-1, 0) => Direction::West,
+            _ => panic!("Invalid direction: ({}, {})", dx, dy),
+        }
+    }
 }
 
 impl Tile {
@@ -171,16 +192,108 @@ impl TileGrid {
         panic!("Invalid tiles: {:?} -> {:?}", previous, current);
     }
 
-    fn find_start(&self) -> Option<(usize, usize)> {
+    fn find_start(&self) -> (usize, usize) {
         for (y, row) in self.tiles.iter().enumerate() {
             for (x, tile) in row.iter().enumerate() {
                 if *tile == Tile::Start {
-                    return Some((x, y));
+                    return (x, y);
                 }
             }
         }
 
-        None
+        panic!("No start tile found");
+    }
+
+    fn find_loop(&self) -> Vec<(usize, usize)> {
+        let start = self.find_start();
+
+        let max_x = self.tiles[start.1].len() - 1;
+        let max_y = self.tiles.len() - 1;
+
+        let first;
+
+        if start.1 > 0 && self.connects(start, (start.0, start.1 - 1)) {
+            first = (start.0, start.1 - 1);
+        } else if start.1 < max_y && self.connects(start, (start.0, start.1 + 1)) {
+            first = (start.0, start.1 + 1);
+        } else if start.0 > 0 && self.connects(start, (start.0 - 1, start.1)) {
+            first = (start.0 - 1, start.1);
+        } else if start.0 < max_x && self.connects(start, (start.0 + 1, start.1)) {
+            first = (start.0 + 1, start.1);
+        } else {
+            panic!("Start tile does not connect to any other tile");
+        }
+
+        let mut loop_vec = vec![start];
+
+        let mut previous = start;
+        let mut current = first;
+
+        loop {
+            if current == start {
+                return loop_vec;
+            }
+
+            loop_vec.push(current);
+
+            let next = self.next(previous, current);
+
+            previous = current;
+            current = next;
+        }
+    }
+
+    fn find_fitting_start_tile(&self, loop_vec: &Vec<(usize, usize)>) -> Tile {
+        let (sx, sy) = loop_vec[0];
+        let (nx, ny) = loop_vec[1];
+        let (ex, ey) = loop_vec[loop_vec.len() - 1];
+
+        let dir_start_to_next =
+            Direction::from_xy(nx as isize - sx as isize, ny as isize - sy as isize);
+
+        let dir_start_to_end =
+            Direction::from_xy(ex as isize - sx as isize, ey as isize - sy as isize);
+
+        match (dir_start_to_next, dir_start_to_end) {
+            (Direction::North, Direction::East) => Tile::NorthEast,
+            (Direction::North, Direction::South) => Tile::NorthSouth,
+            (Direction::North, Direction::West) => Tile::NorthWest,
+            (Direction::East, Direction::North) => Tile::NorthEast,
+            (Direction::East, Direction::South) => Tile::SouthEast,
+            (Direction::East, Direction::West) => Tile::EastWest,
+            (Direction::South, Direction::North) => Tile::NorthSouth,
+            (Direction::South, Direction::East) => Tile::SouthEast,
+            (Direction::South, Direction::West) => Tile::SouthWest,
+            (Direction::West, Direction::North) => Tile::NorthWest,
+            (Direction::West, Direction::East) => Tile::EastWest,
+            (Direction::West, Direction::South) => Tile::SouthWest,
+            _ => panic!(
+                "Invalid directions: {:?} -> {:?}",
+                dir_start_to_next, dir_start_to_end
+            ),
+        }
+    }
+
+    fn simplify(&mut self) {
+        let loop_vec = self.find_loop();
+
+        let start_tile = self.find_fitting_start_tile(&loop_vec);
+
+        let mut new_tiles = self
+            .tiles
+            .iter()
+            .map(|row| row.iter().map(|_| Tile::Ground).collect_vec())
+            .collect_vec();
+
+        for (loop_i, loop_tile) in loop_vec.iter().enumerate() {
+            if loop_i == 0 {
+                new_tiles[loop_tile.1][loop_tile.0] = start_tile;
+            } else {
+                new_tiles[loop_tile.1][loop_tile.0] = self[*loop_tile]
+            }
+        }
+
+        self.tiles = new_tiles;
     }
 }
 
@@ -195,43 +308,39 @@ impl std::ops::Index<(usize, usize)> for TileGrid {
 fn part1(input: &str) -> isize {
     let grid = TileGrid::from_str(input);
 
-    let start = grid.find_start().unwrap();
+    let loop_vec = grid.find_loop();
 
-    let first;
-
-    if grid.connects(start, (start.0, start.1 - 1)) {
-        first = (start.0, start.1 - 1);
-    } else if grid.connects(start, (start.0, start.1 + 1)) {
-        first = (start.0, start.1 + 1);
-    } else if grid.connects(start, (start.0 - 1, start.1)) {
-        first = (start.0 - 1, start.1);
-    } else if grid.connects(start, (start.0 + 1, start.1)) {
-        first = (start.0 + 1, start.1);
-    } else {
-        panic!("Start does not connect to any other tile");
-    }
-
-    let mut steps = 1;
-
-    let mut previous = start;
-    let mut current = first;
-
-    loop {
-        if current == start {
-            break;
-        }
-
-        let next = grid.next(previous, current);
-
-        previous = current;
-        current = next;
-
-        steps += 1;
-    }
-
-    steps / 2
+    loop_vec.len() as isize / 2
 }
 
 fn part2(input: &str) -> isize {
-    todo!();
+    let mut grid = TileGrid::from_str(input);
+
+    grid.simplify();
+
+    let mut area = 0;
+
+    let mut inside;
+
+    for row in grid.tiles.iter() {
+        inside = false;
+
+        for tile in row.iter() {
+            match tile {
+                Tile::Ground => {
+                    if inside {
+                        area += 1;
+                    }
+                }
+                Tile::Start => panic!("Start tile should not be in simplified grid"),
+                _ => {
+                    if tile.south() {
+                        inside = !inside;
+                    }
+                }
+            }
+        }
+    }
+
+    area
 }
