@@ -8,6 +8,7 @@ mod year2018;
 mod year2019;
 mod year2020;
 mod year2021;
+mod year2022;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -33,6 +34,7 @@ fn run(year: u64, day: u64, input: &str) -> Option<Answer> {
         2019 => year2019::run(day, input),
         2020 => year2020::run(day, input),
         2021 => year2021::run(day, input),
+        2022 => year2022::run(day, input),
         _ => None,
     }
 }
