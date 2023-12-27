@@ -4,6 +4,7 @@ use inquire::Confirm;
 mod year2015;
 mod year2016;
 mod year2017;
+mod year2018;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -25,6 +26,7 @@ fn run(year: u64, day: u64, input: &str) -> Option<Answer> {
         2015 => year2015::run(day, input),
         2016 => year2016::run(day, input),
         2017 => year2017::run(day, input),
+        2018 => year2018::run(day, input),
         _ => None,
     }
 }
