@@ -1,4 +1,5 @@
 use clap::Parser;
+use inquire::Confirm;
 
 mod year2015;
 
@@ -37,6 +38,19 @@ fn main() {
 
     if !exists {
         println!("Input file {} does not exist", input_path);
+
+        let confirm = Confirm::new("Do you want to create it?")
+            .with_default(true)
+            .prompt();
+
+        match confirm {
+            Ok(true) => {
+                std::fs::write(&input_path, "").unwrap();
+                println!("Created input file {}", input_path);
+            }
+            _ => (),
+        }
+
         return;
     }
 
