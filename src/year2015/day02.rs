@@ -2,8 +2,8 @@ use crate::{malformed, Answer};
 
 pub fn run(input: &str) -> Answer {
     Answer {
-        part1: Some(part1(input)),
-        part2: Some(part2(input)),
+        part1: part1(input),
+        part2: part2(input),
     }
 }
 

@@ -14,8 +14,8 @@ struct Args {
 }
 
 pub struct Answer {
-    pub part1: Option<String>,
-    pub part2: Option<String>,
+    pub part1: String,
+    pub part2: String,
 }
 
 fn run(year: u64, day: u64, input: &str) -> Option<Answer> {
@@ -61,15 +61,9 @@ fn main() {
     if let Some(answer) = answer {
         println!("Year {} Day {}", args.year, args.day);
 
-        println!(
-            "Part 1: {}",
-            answer.part1.unwrap_or("No solution found".to_string())
-        );
+        println!("Part 1: {}", answer.part1);
 
-        println!(
-            "Part 2: {}",
-            answer.part2.unwrap_or("No solution found".to_string())
-        );
+        println!("Part 2: {}", answer.part2);
     } else {
         println!("No solution found for year {} day {}", args.year, args.day);
     }
