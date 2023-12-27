@@ -17,7 +17,7 @@ pub struct Answer {
     pub part2: Option<String>,
 }
 
-fn run(year: u64, day: u64, input: String) -> Option<Answer> {
+fn run(year: u64, day: u64, input: &str) -> Option<Answer> {
     match year {
         2015 => year2015::run(day, input),
         _ => None,
@@ -42,7 +42,7 @@ fn main() {
 
     let input = std::fs::read_to_string(input_path).unwrap();
 
-    let answer = run(args.year, args.day, input);
+    let answer = run(args.year, args.day, &input);
 
     if let Some(answer) = answer {
         println!("Year {} Day {}", args.year, args.day);
