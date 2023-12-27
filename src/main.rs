@@ -2,6 +2,7 @@ use clap::Parser;
 use inquire::Confirm;
 
 mod year2015;
+mod year2016;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -21,6 +22,7 @@ pub struct Answer {
 fn run(year: u64, day: u64, input: &str) -> Option<Answer> {
     match year {
         2015 => year2015::run(day, input),
+        2016 => year2016::run(day, input),
         _ => None,
     }
 }
