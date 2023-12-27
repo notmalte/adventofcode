@@ -24,6 +24,10 @@ fn run(year: u64, day: u64, input: String) -> Option<Answer> {
     }
 }
 
+fn malformed() -> ! {
+    panic!("Malformed input");
+}
+
 fn main() {
     let args = Args::parse();
 
