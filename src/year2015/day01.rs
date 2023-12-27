@@ -37,7 +37,7 @@ fn part2(input: &str) -> String {
         }
     }
 
-    malformed()
+    malformed("2015", "01")
 }
 
 #[cfg(test)]

@@ -25,8 +25,8 @@ fn run(year: u64, day: u64, input: &str) -> Option<Answer> {
     }
 }
 
-fn malformed() -> ! {
-    panic!("Malformed input");
+fn malformed(year: &str, day: &str) -> ! {
+    panic!("Malformed input for year {} day {}", year, day);
 }
 
 fn main() {
