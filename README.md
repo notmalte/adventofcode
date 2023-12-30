@@ -12,13 +12,13 @@ cargo run -- --year <year> --day <day>
 
 ## Solutions
 
-| 2015                            |                                 |                                |                                |                                 |
-| ------------------------------- | ------------------------------- | ------------------------------ | ------------------------------ | ------------------------------- |
-| [Day 1](src/year2015/day01.rs)  | [Day 2](src/year2015/day02.rs)  | [Day 3](src/year2015/day03.rs) | [Day 4](src/year2015/day04.rs) | [Day 5](src/year2015/day05.rs)  |
-| [Day 6](src/year2015/day06.rs)  | [Day 7](src/year2015/day07.rs)  | [Day 8](src/year2015/day08.rs) | [Day 9](src/year2015/day09.rs) | [Day 10](src/year2015/day10.rs) |
-| [Day 11](src/year2015/day11.rs) | [Day 12](src/year2015/day12.rs) | .                              | .                              | .                               |
-| .                               | .                               | .                              | .                              | .                               |
-| .                               | .                               | .                              | .                              | .                               |
+| 2015                            |                                 |                                 |                                |                                 |
+| ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------ | ------------------------------- |
+| [Day 1](src/year2015/day01.rs)  | [Day 2](src/year2015/day02.rs)  | [Day 3](src/year2015/day03.rs)  | [Day 4](src/year2015/day04.rs) | [Day 5](src/year2015/day05.rs)  |
+| [Day 6](src/year2015/day06.rs)  | [Day 7](src/year2015/day07.rs)  | [Day 8](src/year2015/day08.rs)  | [Day 9](src/year2015/day09.rs) | [Day 10](src/year2015/day10.rs) |
+| [Day 11](src/year2015/day11.rs) | [Day 12](src/year2015/day12.rs) | [Day 13](src/year2015/day13.rs) | .                              | .                               |
+| .                               | .                               | .                               | .                              | .                               |
+| .                               | .                               | .                               | .                              | .                               |
 
 | 2016                           |     |     |     |     |
 | ------------------------------ | --- | --- | --- | --- |
