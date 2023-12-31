@@ -130,7 +130,4 @@ David would gain 41 happiness units by sitting next to Carol."
             "330"
         )
     }
-
-    #[test]
-    fn test_part2() {}
 }
