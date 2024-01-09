@@ -18,7 +18,7 @@ cargo run -- --year <year> --day <day>
 | [Day 6](src/year2015/day06.rs)  | [Day 7](src/year2015/day07.rs)  | [Day 8](src/year2015/day08.rs)  | [Day 9](src/year2015/day09.rs)  | [Day 10](src/year2015/day10.rs) |
 | [Day 11](src/year2015/day11.rs) | [Day 12](src/year2015/day12.rs) | [Day 13](src/year2015/day13.rs) | [Day 14](src/year2015/day14.rs) | [Day 15](src/year2015/day15.rs) |
 | [Day 16](src/year2015/day16.rs) | [Day 17](src/year2015/day17.rs) | [Day 18](src/year2015/day18.rs) | [Day 19](src/year2015/day19.rs) | [Day 20](src/year2015/day20.rs) |
-| .                               | .                               | .                               | .                               | .                               |
+| [Day 21](src/year2015/day21.rs) | .                               | .                               | .                               | .                               |
 
 | 2016                           |     |     |     |     |
 | ------------------------------ | --- | --- | --- | --- |
