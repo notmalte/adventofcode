@@ -29,12 +29,12 @@ fn sum_not_red(value: &Value) -> i64 {
         Value::Bool(_) => 0,
         Value::Number(n) => n.as_i64().unwrap_or_else(|| malformed("2015", "12")),
         Value::String(_) => 0,
-        Value::Array(a) => a.iter().map(|v| sum_not_red(v)).sum(),
+        Value::Array(a) => a.iter().map(sum_not_red).sum(),
         Value::Object(o) => {
             if o.values().any(|v| v == "red") {
                 0
             } else {
-                o.values().map(|v| sum_not_red(v)).sum()
+                o.values().map(sum_not_red).sum()
             }
         }
     }

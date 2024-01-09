@@ -38,13 +38,10 @@ fn parse_distances(input: &str) -> Distances {
 
         distances
             .entry(start.clone())
-            .or_insert_with(HashMap::new)
+            .or_default()
             .insert(end.clone(), distance);
 
-        distances
-            .entry(end)
-            .or_insert_with(HashMap::new)
-            .insert(start, distance);
+        distances.entry(end).or_default().insert(start, distance);
     }
 
     distances
@@ -57,7 +54,7 @@ fn find_best_route(distances: &Distances, find_min: bool, current_route: Vec<Str
         .filter(|location| !current_route.contains(location))
         .collect::<Vec<_>>();
 
-    if remaining.len() == 0 {
+    if remaining.is_empty() {
         return current_route
             .iter()
             .tuple_windows()

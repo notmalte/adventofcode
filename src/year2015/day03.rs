@@ -41,7 +41,7 @@ fn part2(input: &str) -> String {
     let a = parsed.iter().step_by(2).collect::<Vec<_>>();
     let b = parsed.iter().skip(1).step_by(2).collect::<Vec<_>>();
 
-    for carrier in vec![a, b] {
+    for carrier in [a, b] {
         let mut x = 0;
         let mut y = 0;
 

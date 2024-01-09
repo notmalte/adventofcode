@@ -16,7 +16,7 @@ fn part1(input: &str) -> String {
             let mut digits = vec![];
 
             for char in line.chars() {
-                if char.is_digit(10) {
+                if char.is_ascii_digit() {
                     digits.push(char.to_digit(10).unwrap() as u64);
                 }
             }
@@ -48,7 +48,7 @@ fn part2(input: &str) -> String {
             let chars: Vec<_> = line.chars().collect();
 
             for i in 0..chars.len() {
-                if chars[i].is_digit(10) {
+                if chars[i].is_ascii_digit() {
                     digits.push(chars[i].to_digit(10).unwrap() as u64);
                 } else {
                     for (key, value) in digit_strings.iter() {

@@ -59,12 +59,9 @@ fn main() {
             .with_default(true)
             .prompt();
 
-        match confirm {
-            Ok(true) => {
-                std::fs::write(&input_path, "").unwrap();
-                println!("Created input file {}", input_path);
-            }
-            _ => (),
+        if let Ok(true) = confirm {
+            std::fs::write(&input_path, "").unwrap();
+            println!("Created input file {}", input_path);
         }
 
         return;

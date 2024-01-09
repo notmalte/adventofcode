@@ -15,12 +15,12 @@ fn part1(input: &str) -> String {
     let parsed = parse_input(input);
 
     for instruction in parsed {
-        for x in instruction.start_x..=instruction.end_x {
-            for y in instruction.start_y..=instruction.end_y {
+        for row in grid[instruction.start_x..=instruction.end_x].iter_mut() {
+            for light in row[instruction.start_y..=instruction.end_y].iter_mut() {
                 match instruction.command {
-                    Command::TurnOn => grid[x][y] = true,
-                    Command::TurnOff => grid[x][y] = false,
-                    Command::Toggle => grid[x][y] = !grid[x][y],
+                    Command::TurnOn => *light = true,
+                    Command::TurnOff => *light = false,
+                    Command::Toggle => *light = !*light,
                 }
             }
         }
@@ -35,12 +35,12 @@ fn part2(input: &str) -> String {
     let parsed = parse_input(input);
 
     for instruction in parsed {
-        for x in instruction.start_x..=instruction.end_x {
-            for y in instruction.start_y..=instruction.end_y {
+        for row in grid[instruction.start_x..=instruction.end_x].iter_mut() {
+            for light in row[instruction.start_y..=instruction.end_y].iter_mut() {
                 match instruction.command {
-                    Command::TurnOn => grid[x][y] += 1,
-                    Command::TurnOff => grid[x][y] = grid[x][y].saturating_sub(1),
-                    Command::Toggle => grid[x][y] += 2,
+                    Command::TurnOn => *light += 1,
+                    Command::TurnOff => *light = light.saturating_sub(1),
+                    Command::Toggle => *light += 2,
                 }
             }
         }

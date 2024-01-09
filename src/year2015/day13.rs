@@ -21,9 +21,9 @@ fn part2(input: &str) -> String {
     parsed.insert("me".to_string(), HashMap::new());
 
     let others = parsed
-        .iter()
-        .map(|(person, _)| person.clone())
-        .filter(|person| person != "me")
+        .keys()
+        .filter(|&person| person != "me")
+        .cloned()
         .collect::<Vec<_>>();
 
     for person in others {
@@ -63,7 +63,7 @@ fn parse_input(input: &str) -> Happiness {
 
         happiness
             .entry(person1)
-            .or_insert_with(HashMap::new)
+            .or_default()
             .insert(person2, amount);
     }
 
@@ -77,7 +77,7 @@ fn find_max_happiness(happiness: &Happiness, current_seating: Vec<String>) -> i6
         .filter(|person| !current_seating.contains(person))
         .collect::<Vec<_>>();
 
-    if remaining.len() == 0 {
+    if remaining.is_empty() {
         return current_seating
             .iter()
             .enumerate()

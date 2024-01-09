@@ -104,7 +104,7 @@ fn parse_input(input: &str) -> Circuit {
     for line in input.lines() {
         let (src, dst) = line.split_once(" -> ").unwrap();
 
-        let input = match src.split(" ").collect::<Vec<_>>()[..] {
+        let input = match src.split(' ').collect::<Vec<_>>()[..] {
             [a] => WireInput::Pure(parse_wire_or_value(a)),
             [a, "AND", b] => WireInput::And(parse_wire_or_value(a), parse_wire_or_value(b)),
             [a, "OR", b] => WireInput::Or(parse_wire_or_value(a), parse_wire_or_value(b)),

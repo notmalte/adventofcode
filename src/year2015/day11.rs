@@ -29,7 +29,7 @@ fn part2(input: &str) -> String {
     part1(&part1(input))
 }
 
-fn is_valid_password(password: &String) -> bool {
+fn is_valid_password(password: &str) -> bool {
     let chars = password.chars().collect::<Vec<_>>();
 
     let three_increasing_letters = chars.iter().tuple_windows().any(|(&a, &b, &c)| {

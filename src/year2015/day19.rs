@@ -82,13 +82,9 @@ fn part2(input: &str) -> String {
 
                     let new_len = new_molecule.len();
 
-                    if !queue_buckets.contains_key(&new_len) {
-                        queue_buckets.insert(new_len, vec![]);
-                    }
-
                     queue_buckets
-                        .get_mut(&new_len)
-                        .unwrap()
+                        .entry(new_len)
+                        .or_default()
                         .push((new_steps, new_molecule));
                 }
             }
