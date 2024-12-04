@@ -60,8 +60,8 @@ fn part2(input: &str) -> String {
 
                 if *el == 'A'
                     && [tl, tr, bl, br].iter().all(|(x, y)| {
-                        (0..(row.len() as isize)).contains(&x)
-                            && (0..(grid.len() as isize)).contains(&y)
+                        (0..(row.len() as isize)).contains(x)
+                            && (0..(grid.len() as isize)).contains(y)
                             && (grid[*y as usize][*x as usize] == 'M'
                                 || grid[*y as usize][*x as usize] == 'S')
                     })
