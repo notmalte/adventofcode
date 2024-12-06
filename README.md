@@ -7,7 +7,7 @@ Place your input files in the `inputs` directory, e.g. `inputs/2024/01.txt`.
 Run the solutions like this:
 
 ```sh
-cargo run -- --year <year> --day <day>
+cargo run --release -- --year <year> --day <day>
 ```
 
 ## Solutions
@@ -15,7 +15,7 @@ cargo run -- --year <year> --day <day>
 | 2024                           |                                |                                |                                |                                |
 | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
 | [Day 1](src/year2024/day01.rs) | [Day 2](src/year2024/day02.rs) | [Day 3](src/year2024/day03.rs) | [Day 4](src/year2024/day04.rs) | [Day 5](src/year2024/day05.rs) |
-| .                              | .                              | .                              | .                              | .                              |
+| [Day 6](src/year2024/day06.rs) | .                              | .                              | .                              | .                              |
 | .                              | .                              | .                              | .                              | .                              |
 | .                              | .                              | .                              | .                              | .                              |
 | .                              | .                              | .                              | .                              | .                              |
