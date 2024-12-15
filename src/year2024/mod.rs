@@ -14,6 +14,7 @@ pub mod day11;
 pub mod day12;
 pub mod day13;
 pub mod day14;
+pub mod day15;
 
 pub fn run(day: u64, input: &str) -> Option<Answer> {
     match day {
@@ -31,6 +32,7 @@ pub fn run(day: u64, input: &str) -> Option<Answer> {
         12 => Some(day12::run(input)),
         13 => Some(day13::run(input)),
         14 => Some(day14::run(input)),
+        15 => Some(day15::run(input)),
         _ => None,
     }
 }
