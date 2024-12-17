@@ -31,7 +31,7 @@ fn part1(input: &str) -> String {
         |p| map.successors(p),
         |p| p.x == map.end.0 && p.y == map.end.1,
     )
-    .unwrap_or_else(|| malformed("2024", "15"));
+    .unwrap_or_else(|| malformed("2024", "16"));
 
     optimum.to_string()
 }
@@ -41,7 +41,7 @@ fn part2(input: &str) -> String {
 
     let (optimal_paths, _) = map
         .optimal_paths()
-        .unwrap_or_else(|| malformed("2024", "15"));
+        .unwrap_or_else(|| malformed("2024", "16"));
 
     let mut set = HashSet::new();
 
@@ -220,7 +220,7 @@ impl Map {
                 match c {
                     'S' => {
                         if start.is_some() {
-                            malformed("2024", "15");
+                            malformed("2024", "16");
                         }
 
                         start = Some((x, y));
@@ -228,7 +228,7 @@ impl Map {
                     }
                     'E' => {
                         if end.is_some() {
-                            malformed("2024", "15");
+                            malformed("2024", "16");
                         }
 
                         end = Some((x, y));
