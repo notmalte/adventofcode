@@ -60,7 +60,7 @@ fn part2(input: &str) -> String {
 }
 
 fn find_path(
-    corrupted: &Vec<Vec<bool>>,
+    corrupted: &[Vec<bool>],
     width: usize,
     height: usize,
 ) -> Option<(Vec<(usize, usize)>, usize)> {
